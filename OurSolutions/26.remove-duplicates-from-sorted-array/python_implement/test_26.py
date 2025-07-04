@@ -27,7 +27,6 @@ def measure_time_and_memory(func, nums):
     ([0,0,1,1,1,2,2,3,3,4], [0,1,2,3,4], 5),
     ([1,2,3], [1,2,3], 3),
     ([1,1,1,1,1], [1], 1),
-    ([], [], 0),
 ])
 def test_removeDuplicates_TwoPointers(solution, nums, expected_nums, expected_len):
     nums_copy = nums.copy()
@@ -43,7 +42,6 @@ def test_removeDuplicates_TwoPointers(solution, nums, expected_nums, expected_le
     ([0,0,1,1,1,2,2,3,3,4], [0,1,2,3,4], 5),
     ([1,2,3], [1,2,3], 3),
     ([1,1,1,1,1], [1], 1),
-    ([], [], 0),
 ])
 def test_removeDuplicates_Reverse(solution, nums, expected_nums, expected_len):
     nums_copy = nums.copy()

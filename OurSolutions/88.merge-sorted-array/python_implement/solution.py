@@ -31,6 +31,7 @@ class Solution:
                 res.append(nums2[idx2])
                 idx2 += 1
         nums1[:] = res
+        
     # 方法三：逆向双指针
     def mergeBackward(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """

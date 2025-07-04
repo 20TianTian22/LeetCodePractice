@@ -7,49 +7,49 @@ from solution import Solution
 def solution():
     return Solution()
 
-def measure_time_and_memory(func, nums, val):
+def measure_time_and_memory(func, nums):
     tracemalloc.start()
     start_time = time.perf_counter()
 
-    length = func(nums, val)
+    length = func(nums)
 
     end_time = time.perf_counter()
     current, peak = tracemalloc.get_traced_memory()
     tracemalloc.stop()
 
-    exec_time = (end_time - start_time) * 1e6  # 微秒
-    peak_kb = peak / 1024  # 转成 KB
+    exec_time = (end_time - start_time) * 1e6  # 转微秒
+    peak_kb = peak / 1024  # 转 KB
 
     return length, exec_time, peak_kb
 
-@pytest.mark.parametrize("nums, val, expected_nums, expected_len", [
-    ([3,2,2,3], 3, [2,2], 2),
-    ([0,1,2,2,3,0,4,2], 2, [0,1,3,0,4], 5),
-    ([1,1,1,1], 1, [], 0),
-    ([4,5], 3, [4,5], 2),
-    ([], 0, [], 0)
+@pytest.mark.parametrize("nums, expected_nums, expected_len", [
+    ([1,1,2], [1,2], 2),
+    ([0,0,1,1,1,2,2,3,3,4], [0,1,2,3,4], 5),
+    ([1,2,3], [1,2,3], 3),
+    ([1,1,1,1,1], [1], 1),
+    ([], [], 0),
 ])
-def test_removeElement_Remove(solution, nums, val, expected_nums, expected_len):
+def test_removeDuplicates_TwoPointers(solution, nums, expected_nums, expected_len):
     nums_copy = nums.copy()
-    length, exec_time, peak_kb = measure_time_and_memory(solution.removeElement_Remove, nums_copy, val)
+    length, exec_time, peak_kb = measure_time_and_memory(solution.removeDuplicates_TwoPointers, nums_copy)
 
-    print(f"\n[Remove] Time: {exec_time:.2f}us, Peak Memory: {peak_kb:.2f} KB")
+    print(f"\n[TwoPointers] Time: {exec_time:.2f}us, Peak Memory: {peak_kb:.2f} KB")
 
     assert length == expected_len
-    assert sorted(nums_copy[:length]) == sorted(expected_nums)
+    assert nums_copy[:length] == expected_nums
 
-@pytest.mark.parametrize("nums, val, expected_nums, expected_len", [
-    ([3,2,2,3], 3, [2,2], 2),
-    ([0,1,2,2,3,0,4,2], 2, [0,1,3,0,4], 5),
-    ([1,1,1,1], 1, [], 0),
-    ([4,5], 3, [4,5], 2),
-    ([], 0, [], 0)
+@pytest.mark.parametrize("nums, expected_nums, expected_len", [
+    ([1,1,2], [1,2], 2),
+    ([0,0,1,1,1,2,2,3,3,4], [0,1,2,3,4], 5),
+    ([1,2,3], [1,2,3], 3),
+    ([1,1,1,1,1], [1], 1),
+    ([], [], 0),
 ])
-def test_removeElement_Stack(solution, nums, val, expected_nums, expected_len):
+def test_removeDuplicates_Reverse(solution, nums, expected_nums, expected_len):
     nums_copy = nums.copy()
-    length, exec_time, peak_kb = measure_time_and_memory(solution.removeElement_Stack, nums_copy, val)
+    length, exec_time, peak_kb = measure_time_and_memory(solution.removeDuplicates_Reverse, nums_copy)
 
-    print(f"\n[Stack] Time: {exec_time:.2f}us, Peak Memory: {peak_kb:.2f} KB")
+    print(f"\n[Reverse] Time: {exec_time:.2f}us, Peak Memory: {peak_kb:.2f} KB")
 
     assert length == expected_len
-    assert sorted(nums_copy[:length]) == sorted(expected_nums)
+    assert nums_copy[:length] == expected_nums
